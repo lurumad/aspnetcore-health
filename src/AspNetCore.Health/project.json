@@ -1,0 +1,30 @@
+﻿{
+  "version": "1.0.0-*",
+  "authors": [ "Luis Ruiz Pavon" ],
+  "copyright": "Copyright Luis Ruiz Pavon",
+  "description": "ASP.NET Core middleware to provide a health check endpoint for load balancers.",
+  "packOptions": {
+    "licenseUrl": "https://github.com/lurumad/aspnetcore-health/blob/master/LICENSE",
+    "repository": {
+      "type": "git",
+      "url": "git://github.com/lurumad/aspnetcore-health"
+    },
+    "tags": [
+      "aspnetcore",
+      "healthcheck",
+      "loadbalancers"
+    ]
+  },
+  "dependencies": {
+    "Microsoft.AspNetCore.Http.Abstractions": "1.1.0",
+    "Microsoft.Extensions.Logging.Abstractions": "1.1.0",
+    "Newtonsoft.Json": "9.0.1",
+    "StackExchange.Redis": "1.1.608",
+    "System.Data.SqlClient": "4.3.0",
+    "NETStandard.Library": "1.6.1-*"
+  },
+  "frameworks": {
+    "netstandard1.6": {
+    }
+  }
+}
