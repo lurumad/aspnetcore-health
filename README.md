@@ -64,6 +64,7 @@ Run the [HealthSample](https://github.com/lurumad/aspnetcore-health/tree/master/
     }
 ]
 ```
+If all services are healthy, returns http **200 OK** status code, but if there are any unhealthy service returns http **500 Internal Server Error** status code.
 
 Try with other services!
 
