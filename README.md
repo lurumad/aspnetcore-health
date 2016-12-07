@@ -8,8 +8,6 @@ Health checking is the process where [load balancers] (https://en.wikipedia.org/
 
 AspNetCore.Health enables load balancers to monitor the status of deployed Web applications.
 
-Examples in the wiki.
-
 ### Scenarios
 
 AspNetCore.Health enables you to do the following tasks:
@@ -24,6 +22,39 @@ You should install [AspNetCore.Health with NuGet](https://www.nuget.org/packages
     Install-Package AspNetCore.Health
     
 This command from Package Manager Console will download and install AspNetCore.Health and all required dependencies.
+
+### Meet AspNetCore.Health
+
+By default AspNetCore provides out of the box some health checks providers:
+
+* Sql Server
+* Redis
+* Web service (Http services)
+
+```csharp
+public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+{
+    var options = new HealthCheckOptions()
+        .AddSqlServer("Server=.\SQLExpress...", "Sql Server 2012")
+        .AddRedis("localhost", "Local Redis")
+        .AddWebService("Google", "http://www.google.com");
+
+    app.UseHealthCheck(options);
+}
+```
+
+You can create your own health check providers by inheriting from [HealthCheck](https://github.com/lurumad/aspnetcore-health/blob/master/src/AspNetCore.Health/HealthCheck.cs) class, and add it using Add extension method:
+
+```csharp
+public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+{
+    var options = new HealthCheckOptions()
+        .Add(new MyCustomHealthCheck("", ""));
+
+    app.UseHealthCheck(options);
+}
+```
+
 
 ### Continous integration build
 
