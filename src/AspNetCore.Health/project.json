@@ -2,7 +2,7 @@
   "version": "1.0.0-beta-*",
   "authors": [ "Luis Ruiz Pavon" ],
   "copyright": "Copyright Luis Ruiz Pavon",
-  "description": "ASP.NET Core middleware to provide a health check endpoint for load balancers.",
+  "description": "AspNetCore.Health enables load balancers to monitor the status of deployed Web applications.",
   "packOptions": {
     "licenseUrl": "https://github.com/lurumad/aspnetcore-health/blob/master/LICENSE",
     "repository": {
