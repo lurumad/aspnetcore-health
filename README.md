@@ -54,7 +54,7 @@ public void Configure(IApplicationBuilder app, IHostingEnvironment env)
     app.UseHealthCheck(options);
 }
 ```
-Run the HealthSample and open your browser [http://localhost:5000/health](http://localhost:5000/health)
+Run the [HealthSample](https://github.com/lurumad/aspnetcore-health/tree/master/samples/HealthSample) and open your browser [http://localhost:5000/health](http://localhost:5000/health)
 
 ```json
 [
