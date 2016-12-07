@@ -1,5 +1,5 @@
 ﻿{
-  "version": "1.0.0-beta-*",
+  "version": "1.0.0",
   "authors": [ "Luis Ruiz Pavon" ],
   "copyright": "Copyright Luis Ruiz Pavon",
   "description": "AspNetCore.Health enables load balancers to monitor the status of deployed Web applications.",
