@@ -1,23 +1,29 @@
-﻿using System.Collections.Concurrent;
-using System.Linq;
-using Microsoft.Extensions.Logging;
+﻿using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace AspNetCore.Health
 {
     public class HealthCheckContext
     {
-        public ILogger Logger { get; set; }
+        public Dictionary<string, Func<ValueTask<HealthCheckResult>>> Checks { get; }
 
-        public ConcurrentBag<HealthCheckResult> Results { get; } = new ConcurrentBag<HealthCheckResult>();
-
-        public void AddResult(HealthCheckResult result)
+        public HealthCheckContext()
         {
-            Results.Add(result);
+            Checks = new Dictionary<string, Func<ValueTask<HealthCheckResult>>>();
         }
 
-        public bool IsHealthy()
+        public HealthCheckContext Add(string name, Func<Task<HealthCheckResult>> check)
         {
-            return Results.All(result => result.Status == HealthCheckStatus.Healthy);
+            Checks.Add(name, () => new ValueTask<HealthCheckResult>(check()));
+
+            return this;
+        }
+        public HealthCheckContext Add(string name, Func<HealthCheckResult> check)
+        {
+            Checks.Add(name, () => new ValueTask<HealthCheckResult>(check()));
+
+            return this;
         }
     }
 }

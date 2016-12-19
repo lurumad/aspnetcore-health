@@ -12,6 +12,7 @@ namespace AspNetCore.Health.Internal
 
         private HttpClientSingleton()
         {
+            DefaultRequestHeaders.Add("cache-control", "no-cache");
         }
     }
 }

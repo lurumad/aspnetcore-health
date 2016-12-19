@@ -1,51 +1,38 @@
-﻿using System.Collections.Generic;
-using System.Net;
+﻿using System.Net;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 
 namespace AspNetCore.Health
 {
     public class HealthCheckMiddleware
     {
-        private readonly ILogger<HealthCheckMiddleware> logger;
         private readonly RequestDelegate next;
-        private readonly HealthCheckOptions options;
+        private readonly IHealthCheckService healthCheckService;
+        private readonly PathString endPoint;
 
         public HealthCheckMiddleware(
             RequestDelegate next,  
-            ILoggerFactory loggerFactory,
-            HealthCheckOptions options)
+            IHealthCheckService healthCheckService,
+            PathString endPoint)
         {
             this.next = next;
-            this.options = options;
-            logger = loggerFactory.CreateLogger<HealthCheckMiddleware>();
+            this.healthCheckService = healthCheckService;
+            this.endPoint = endPoint;
         }
 
         public async Task Invoke(HttpContext httpContext)
         {
-            if (httpContext.Request.Path != this.options.EndPoint)
+            if (httpContext.Request.Path != endPoint)
             {
                 await next.Invoke(httpContext);
             }
             else
             {
-                var tasks = new List<Task>();
-                var context = new HealthCheckContext
-                {
-                    Logger = logger
-                };
+                var healthy = await healthCheckService.CheckAsync();
 
-                foreach (var healthCheck in options.HealthChecks)
-                {
-                    tasks.Add(healthCheck.CheckAsync(context));
-                }
-
-                await Task.WhenAll(tasks);
-
-                var code = context.IsHealthy() ? HttpStatusCode.OK : HttpStatusCode.InternalServerError;
-                var json = JsonConvert.SerializeObject(context.Results);
+                var code = healthy ? HttpStatusCode.OK : HttpStatusCode.InternalServerError;
+                var json = JsonConvert.SerializeObject(healthCheckService.Results);
 
                 await WriteResponseAsync(
                     httpContext,

@@ -2,17 +2,28 @@
 using AspNetCore.Health;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 
 namespace HealthSample
 {
     public class Startup
     {
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void ConfigureServices(IServiceCollection services)
         {
-            var options = new HealthCheckOptions()
-                .AddWebService("Google", "http://www.google.com");
+            services
+                .AddLogging()
+                .AddHealthChecks(context =>
+                {
+                    context.AddUrlCheck("http://www.google.com");
+                });
+        }
 
-            app.UseHealthCheck(options);
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
+        {
+            loggerFactory.AddConsole();
+
+            app.UseHealthCheck("/health");
         }
 
         public static void Main(string[] args)

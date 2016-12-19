@@ -11,5 +11,20 @@
             Name = name;
             Status = status;
         }
+
+        public static HealthCheckResult Healthy(string description)
+        {
+            return new HealthCheckResult($"{description}", HealthCheckStatus.Healthy);
+        }
+
+        public static HealthCheckResult Unhealthy(string description)
+        {
+            return new HealthCheckResult($"{description}", HealthCheckStatus.Unhealthy);
+        }
+
+        public static HealthCheckResult Warning(string description)
+        {
+            return new HealthCheckResult($"{description}", HealthCheckStatus.Warning);
+        }
     }
 }

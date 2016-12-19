@@ -7,6 +7,7 @@ namespace AspNetCore.Health
     public enum HealthCheckStatus
     {
         Healthy,
-        Unhealthy
+        Unhealthy,
+        Warning
     }
 }
