@@ -6,6 +6,9 @@
     "FluentAssertions": "4.18.0",
     "AspNetCore.Health": {
       "target": "project"
+    },
+    "AspNetCore.Health.Ftp": {
+      "target": "project"
     }
   },
   "frameworks": {
