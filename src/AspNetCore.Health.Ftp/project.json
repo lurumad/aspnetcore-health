@@ -1,0 +1,30 @@
+﻿{
+  "version": "1.0.0",
+  "authors": [
+    "Carlos Mendible"
+  ],
+  "copyright": "Copyright Carlos Mendible",
+  "description": "AspNetCore.Health.Ftp enables load balancers to monitor the status of deployed Web applications.",
+  "packOptions": {
+    "licenseUrl": "https://github.com/lurumad/aspnetcore-health/blob/master/LICENSE",
+    "repository": {
+      "type": "git",
+      "url": "git://github.com/lurumad/aspnetcore-health"
+    },
+    "tags": [
+      "aspnetcore",
+      "healthcheck",
+      "loadbalancers"
+    ]
+  },
+  "dependencies": {
+    "AspNetCore.Health": {
+      "target": "project"
+    },
+    "NETStandard.Library": "1.6.1-*",
+    "CoreFtp": "1.3.0"
+  },
+  "frameworks": {
+    "netstandard1.6": {}
+  }
+}

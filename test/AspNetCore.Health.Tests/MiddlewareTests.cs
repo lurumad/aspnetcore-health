@@ -26,13 +26,16 @@ namespace AspNetCore.Health.Tests
             response.StatusCode.Should().Be(HttpStatusCode.InternalServerError);
         }
 
-        [Fact(DisplayName = "returns a http statuscode ok (200) if there are not unhealthy services")]
-        public async Task returns_a_httpstatuscode_ok_if_there_are_any_unhealthy_service()
+        [Fact(DisplayName = "returns a http statuscode ok (200) if there are no unhealthy services")]
+        public async Task returns_a_httpstatuscode_ok_if_there_are_no_unhealthy_service()
         {
             var options = new HealthCheckOptions()
-                .AddWebService("Google", "http://www.google.com");
+                .AddWebService("Google", "http://www.google.com")
+                .AddFtp("ftp.uconn.edu", "anonymous", "", 21, FtpTransferMode.Binary, "Public Ftp Test");
+
             var builder = new WebHostBuilder()
                 .Configure(app => app.UseHealthCheck(options));
+
             var server = new TestServer(builder);
 
             var response = await server.CreateClient().GetAsync("/health");
