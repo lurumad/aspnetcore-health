@@ -31,7 +31,8 @@ namespace AspNetCore.Health.Tests
         {
             var options = new HealthCheckOptions()
                 .AddWebService("Google", "http://www.google.com")
-                .AddFtp("ftp.uconn.edu", "anonymous", "", 21, FtpTransferMode.Binary, "Public Ftp Test");
+                .AddFtp("ftp.uconn.edu", "anonymous", "", 21, FtpTransferMode.Binary, "Public Ftp Test")
+                .Add("Custom check", () => Task.FromResult(true));
 
             var builder = new WebHostBuilder()
                 .Configure(app => app.UseHealthCheck(options));

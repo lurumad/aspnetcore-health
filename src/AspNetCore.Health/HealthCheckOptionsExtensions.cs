@@ -1,4 +1,6 @@
-﻿using AspNetCore.Health.Checks;
+﻿using System;
+using System.Threading.Tasks;
+using AspNetCore.Health.Checks;
 
 namespace AspNetCore.Health
 {
@@ -39,6 +41,16 @@ namespace AspNetCore.Health
             HealthCheck healthCheck)
         {
             options.HealthChecks.Add(healthCheck);
+
+            return options;
+        }
+
+        public static HealthCheckOptions Add(
+            this HealthCheckOptions options,
+            string serviceName,
+            Func<Task<bool>> check)
+        {
+            options.HealthChecks.Add(new CustomHealthCheck(serviceName, check));
 
             return options;
         }
