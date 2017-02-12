@@ -27,33 +27,35 @@ This command from Package Manager Console will download and install AspNetCore.H
 
 By default AspNetCore provides out of the box some health checks providers:
 
-* Sql Server
-* Redis
-* Web service (Http services)
+* Check Urls (Http services)
+* Ftp
 
+```csharp
+public void ConfigureServices(IServiceCollection app)
+{
+    services.AddHealthChecks(context =>
+    {
+        context
+            .AddUrlCheck("http://www.google.com")
+            .AddFtp("ftp.uconn.edu", "anonymous", "", 21, FtpTransferMode.Binary, "Public Ftp Test");
+    });
+}
+```
 ```csharp
 public void Configure(IApplicationBuilder app, IHostingEnvironment env)
 {
-    var options = new HealthCheckOptions()
-        .AddSqlServer("Server=.\SQLExpress...", "Sql Server 2012")
-        .AddRedis("localhost", "Local Redis")
-        .AddWebService("Google", "http://www.google.com");
-
-    app.UseHealthCheck(options);
+    app.UseHealthCheck("/health")
 }
 ```
 
-You can create your own health check providers by inheriting from [HealthCheck](https://github.com/lurumad/aspnetcore-health/blob/master/src/AspNetCore.Health/HealthCheck.cs) class, and add it using Add extension method:
+You can create your own health check providers in a functional style avoiding inheritance:
 
 ```csharp
-public void Configure(IApplicationBuilder app, IHostingEnvironment env)
-{
-    var options = new HealthCheckOptions()
-        .Add(new MyCustomHealthCheck("", ""));
-
-    app.UseHealthCheck(options);
-}
+Func<Task<HealthCheckResult>>
 ```
+
+You can see some examples [here] (https://github.com/lurumad/aspnetcore-health/blob/master/src/AspNetCore.Health/HealthCheckContextExtensions.cs)
+
 Run the [HealthSample](https://github.com/lurumad/aspnetcore-health/tree/master/samples/HealthSample) and open your browser [http://localhost:5000/health](http://localhost:5000/health)
 
 ```json
