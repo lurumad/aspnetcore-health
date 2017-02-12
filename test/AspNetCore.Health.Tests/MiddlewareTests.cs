@@ -1,5 +1,6 @@
 ﻿using System.Net;
 using System.Threading.Tasks;
+using AspNetCore.Health.Internal;
 using FluentAssertions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -38,10 +39,13 @@ namespace AspNetCore.Health.Tests
                 {
                     services.AddHealthChecks(context =>
                     {
-                        context.AddUrlCheck("http://www.google.com");
+                        context
+                            .AddUrlCheck("http://www.google.com")
+                            .AddFtp("ftp.uconn.edu", "anonymous", "", 21, FtpTransferMode.Binary, "Public Ftp Test");
                     });
                 })
                 .Configure(app => app.UseHealthCheck("/health"));
+
             var server = new TestServer(builder);
 
             var response = await server.CreateClient().GetAsync("/health");

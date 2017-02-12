@@ -1,4 +1,4 @@
-# AspNetCore.Health [![MyGet CI](https://img.shields.io/myget/aspnetcore-health/v/AspNetCore.Health.svg)](http://myget.org/gallery/aspnetcore-health)
+# AspNetCore.Health [![MyGet CI](https://img.shields.io/myget/aspnetcore-health/v/AspNetCore.Health.svg)](http://myget.org/gallery/aspnetcore-health) [![NuGet](https://img.shields.io/nuget/v/AspNetCore.Health.svg)](https://www.nuget.org/packages/AspNetCore.Health/)
 
 ### What Is Application Health Check?
 
@@ -64,6 +64,7 @@ Run the [HealthSample](https://github.com/lurumad/aspnetcore-health/tree/master/
     }
 ]
 ```
+If all services are healthy, returns http **200 OK** status code, but if there are any unhealthy service returns http **500 Internal Server Error** status code.
 
 Try with other services!
 
