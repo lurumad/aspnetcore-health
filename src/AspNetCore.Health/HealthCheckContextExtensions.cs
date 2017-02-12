@@ -1,53 +1,10 @@
-﻿using System.Data.SqlClient;
-using System.Text;
+﻿using System.Text;
 using AspNetCore.Health.Internal;
-using StackExchange.Redis;
 
 namespace AspNetCore.Health
 {
     public static class HealthCheckContextExtensions
     {
-        public static HealthCheckContext AddSqlServer(this HealthCheckContext checkContext, string name, string connectionString)
-        {
-            checkContext.Add(name, async () =>
-            {
-                try
-                {
-                    using (var connection = new SqlConnection(connectionString))
-                    {
-                        await connection.OpenAsync().ConfigureAwait(false);
-                    }
-
-                    return HealthCheckResult.Healthy($"{name} : {connectionString}");
-                }
-                catch
-                {
-                    return HealthCheckResult.Unhealthy($"{name} : {connectionString}");
-                }
-            });
-
-            return checkContext;
-        }
-
-        public static HealthCheckContext AddRedis(this HealthCheckContext checkContext, string name, string configuration)
-        {
-            checkContext.Add(name, async () =>
-            {
-                try
-                {
-                    await ConnectionMultiplexer.ConnectAsync(configuration).ConfigureAwait(false);
-
-                    return HealthCheckResult.Healthy($"{name} : {configuration}");
-                }
-                catch
-                {
-                    return HealthCheckResult.Healthy($"{name} : {configuration}");
-                }
-            });
-
-            return checkContext;
-        }
-
         public static HealthCheckContext AddUrlCheck(this HealthCheckContext checkContext, string url)
         {
             checkContext.Add(url, async () =>

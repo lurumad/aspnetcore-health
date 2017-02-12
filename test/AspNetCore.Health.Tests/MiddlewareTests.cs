@@ -11,7 +11,7 @@ namespace AspNetCore.Health.Tests
 {
     public class middleware_it_should
     {
-        [Fact(DisplayName = "returns a http statuscode internalservererror (500) if there are any unhealthy service")]
+        [Fact]
         public async Task returns_a_httpstatuscode_internalservererror_if_there_are_any_unhealthy_service()
         {
             var builder = new WebHostBuilder()
@@ -19,7 +19,7 @@ namespace AspNetCore.Health.Tests
                     {
                         services.AddHealthChecks(context =>
                         {
-                            context.AddSqlServer("Sql Server 2012", "invalid connection string");
+                            context.AddUrlCheck("http://invalidurl");
                         });
                     })
                 .Configure(app => app.UseHealthCheck("/health"));
@@ -30,7 +30,7 @@ namespace AspNetCore.Health.Tests
             response.StatusCode.Should().Be(HttpStatusCode.InternalServerError);
         }
 
-        [Fact(DisplayName = "returns a http statuscode ok (200) if there are not unhealthy services")]
+        [Fact]
         public async Task returns_a_httpstatuscode_ok_if_there_are_any_unhealthy_service()
         {
             var builder = new WebHostBuilder()

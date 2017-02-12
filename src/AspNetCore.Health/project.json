@@ -19,8 +19,6 @@
     "Microsoft.AspNetCore.Http.Abstractions": "1.1.0",
     "Microsoft.Extensions.Logging.Abstractions": "1.1.0",
     "Newtonsoft.Json": "9.0.1",
-    "StackExchange.Redis": "1.1.608",
-    "System.Data.SqlClient": "4.3.0",
     "NETStandard.Library": "1.6.1-*",
     "System.Threading.Tasks.Extensions": "4.3.0",
     "Microsoft.Extensions.DependencyInjection.Abstractions": "1.1.0"

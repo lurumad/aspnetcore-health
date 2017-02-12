@@ -26,6 +26,7 @@ namespace AspNetCore.Health
         {
             var healthy = true;
             var state = new StringBuilder();
+            Results.Clear();
 
             foreach (var check in healthCheckContext.Checks)
             {
