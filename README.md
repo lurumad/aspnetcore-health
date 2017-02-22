@@ -78,4 +78,4 @@ Try with other services!
 
 ### Copyright
 
-Copyright © 2016 Luis Ruiz
+Copyright © 2016 Luis Ruiz (lurumad)
