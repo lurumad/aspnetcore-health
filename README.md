@@ -38,8 +38,6 @@ public void ConfigureServices(IServiceCollection app)
         context
             .AddUrlCheck("http://www.google.com")
             .AddFtp("ftp.uconn.edu", "anonymous", "", 21, FtpTransferMode.Binary, "Public Ftp Test");
-            .AddSqlDatabase("NameOfSqlDatabase", "connectionString");
-            .AddMongoDatabase("NameOfMongoDatabase", "connectionString);
     });
 }
 ```
