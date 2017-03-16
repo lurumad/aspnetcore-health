@@ -1,6 +1,9 @@
-﻿using System.Text;
+﻿using System.Data;
+using System.Data.SqlClient;
+using System.Text;
 using AspNetCore.Health.Internal;
 using CoreFtp;
+using MongoDB.Driver;
 
 namespace AspNetCore.Health
 {
@@ -110,6 +113,50 @@ namespace AspNetCore.Health
                 }
             });
 
+            return checkContext;
+        }
+        public static HealthCheckContext AddSqlDatabase(this HealthCheckContext checkContext, IDbConnection dbConnection)
+        {
+            return AddSqlDatabase(checkContext, dbConnection.Database, dbConnection.ConnectionString);
+        }
+        public static HealthCheckContext AddSqlDatabase(this HealthCheckContext checkContext, string database, string connectionString)
+        {
+            SqlConnection connection = null;
+            checkContext.Add(database, async () =>
+            {
+                try
+                {
+                    connection = new SqlConnection(connectionString);
+                    await connection.OpenAsync();
+                    return HealthCheckResult.Healthy(database);
+                }
+                catch
+                {
+                    return HealthCheckResult.Unhealthy(database);
+                }
+                finally
+                {
+                    connection?.Close();
+                }
+            });
+            return checkContext;
+        }
+        public static HealthCheckContext AddMongoDatabase(this HealthCheckContext checkContext, string database, string connectionString)
+        {
+            checkContext.Add(database, () =>
+            {
+                try
+                {
+                    IMongoClient moClient = new MongoClient(connectionString);
+                    var state = moClient.Cluster.Description.State;
+                    return state == MongoDB.Driver.Core.Clusters.ClusterState.Connected ? HealthCheckResult.Healthy(database) : HealthCheckResult.Unhealthy(database);
+                }
+                catch
+                {
+                    return HealthCheckResult.Unhealthy(database);
+                }
+
+            });
             return checkContext;
         }
     }
