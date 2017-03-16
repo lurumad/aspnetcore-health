@@ -52,7 +52,5 @@ namespace AspNetCore.Health.Tests
 
             response.StatusCode.Should().Be(HttpStatusCode.OK);
         }
-
-     
     }
 }
