@@ -1,0 +1,34 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <Description>AspNetCore.Health enables load balancers to monitor the status of deployed Web applications.</Description>
+    <Copyright>Copyright Luis Ruiz Pavon</Copyright>
+    <VersionPrefix>2.0.0</VersionPrefix>
+    <Authors>Luis Ruiz Pavon</Authors>
+    <TargetFramework>netstandard1.6</TargetFramework>
+    <AssemblyName>AspNetCore.Health</AssemblyName>
+    <PackageId>AspNetCore.Health</PackageId>
+    <PackageTags>aspnetcore;healthcheck;loadbalancers</PackageTags>
+    <PackageLicenseUrl>https://github.com/lurumad/aspnetcore-health/blob/master/LICENSE</PackageLicenseUrl>
+    <RepositoryType>git</RepositoryType>
+    <RepositoryUrl>git://github.com/lurumad/aspnetcore-health</RepositoryUrl>
+    <NetStandardImplicitPackageVersion>1.6.1</NetStandardImplicitPackageVersion>
+    <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
+    <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
+    <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="1.1.1" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="1.1.1" />
+    <PackageReference Include="MongoDB.Driver" Version="2.4.3" />
+    <PackageReference Include="Newtonsoft.Json" Version="9.0.1" />
+    <PackageReference Include="Npgsql" Version="3.2.1" />
+    <PackageReference Include="System.Data.Common" Version="4.3.0" />
+    <PackageReference Include="System.Data.SqlClient" Version="4.3.0" />
+    <PackageReference Include="System.Threading.Tasks.Extensions" Version="4.3.0" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="1.1.0" />
+    <PackageReference Include="CoreFtp" Version="1.3.0" />
+  </ItemGroup>
+
+</Project>
