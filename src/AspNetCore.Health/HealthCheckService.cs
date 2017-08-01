@@ -36,7 +36,7 @@ namespace AspNetCore.Health
 
                     Results.Add(result);
 
-                    healthy = result.Status == HealthCheckStatus.Healthy || result.Status == HealthCheckStatus.Warning;
+                    healthy = (result.Status == HealthCheckStatus.Healthy || result.Status == HealthCheckStatus.Warning) && healthy;
 
                     state.Append($"{check.Key} : {(healthy ? "Healthy" : "Unhealthy")}");
                 }
