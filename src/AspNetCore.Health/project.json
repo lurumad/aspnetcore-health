@@ -2,7 +2,7 @@
   "version": "2.0.1",
   "authors": [ "Luis Ruiz Pavon" ],
   "copyright": "Copyright Luis Ruiz Pavon",
-  "description": "AspNetCore.Health enables load balancers to monitor the status of deployed Web applications.",
+  "description": "AspNetCore.Health enables load balancers to monitor the status of deployed web applications.",
   "packOptions": {
     "licenseUrl": "https://github.com/lurumad/aspnetcore-health/blob/master/LICENSE",
     "repository": {
