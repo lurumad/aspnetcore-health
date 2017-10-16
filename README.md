@@ -2,7 +2,7 @@
 
 ### What Is Application Health Check?
 
-Health checking is the process where [load balancers] (https://en.wikipedia.org/wiki/Load_balancing_(computing)) or application delivery controller does periodic check on our applications to make sure that they are up and responding without any problems. If our applications are down for every reason or any of the system that our applications depends on (A database, a distributed cache, web service, ect) are down, the load balancer should detect this and stop sending traffic its way.
+Health checking is the process where [load balancers](https://en.wikipedia.org/wiki/Load_balancing_(computing)) or application delivery controller does periodic check on our applications to make sure that they are up and responding without any problems. If our applications are down for every reason or any of the system that our applications depends on (A database, a distributed cache, web service, ect) are down, the load balancer should detect this and stop sending traffic its way.
 
 ### Why AspNetCore.Health?
 
