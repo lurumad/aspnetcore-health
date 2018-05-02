@@ -1,5 +1,7 @@
 # AspNetCore.Health [![MyGet CI](https://img.shields.io/myget/aspnetcore-health/v/AspNetCore.Health.svg)](http://myget.org/gallery/aspnetcore-health) [![NuGet](https://img.shields.io/nuget/v/AspNetCore.Health.svg)](https://www.nuget.org/packages/AspNetCore.Health/)
 
+![#f03c15](https://placehold.it/15/f03c15/000000?text=+) This libray has been **discontinued** in favor of [BeatPulse](https://github.com/Xabaril/BeatPulse) ![#f03c15](https://placehold.it/15/f03c15/000000?text=+) 
+
 ### What Is Application Health Check?
 
 Health checking is the process where [load balancers](https://en.wikipedia.org/wiki/Load_balancing_(computing)) or application delivery controller does periodic check on our applications to make sure that they are up and responding without any problems. If our applications are down for every reason or any of the system that our applications depends on (A database, a distributed cache, web service, ect) are down, the load balancer should detect this and stop sending traffic its way.
